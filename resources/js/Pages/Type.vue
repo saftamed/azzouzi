@@ -147,16 +147,24 @@ export default defineComponent({
         JetNavLink,
     },
     props: {
-        types: Object,
+        typesa: Object,
     },
     data: function () {
         return {
+          types:this.typesa,
             show: false,
             t:{}
         };
     },methods:{
         detaile(a){
             this.$inertia.visit("types/"+a);
+        },saveType(){
+           axios
+            .post("/type/add", this.t)
+            .then((response) => {
+                this.types = response.data;
+                this.show = false;
+            });
         }
     }
 });

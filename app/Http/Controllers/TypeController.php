@@ -19,4 +19,17 @@ class TypeController extends Controller
             return response()->json($type);
         }
     }
+
+    public function add(Request $req)
+    {
+       $type = new Type();
+        $type->ref = $req["ref"];
+        $type->nom = $req["nom"];
+        $type->fournisseur = $req["fournisseur"];
+        $type->save();
+        
+        $type = Type::all();
+        return response()->json($type);
+        
+    }
 }

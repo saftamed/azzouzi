@@ -7,6 +7,7 @@ use App\Http\Controllers\MachineController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TypeController;
 use App\Models\Machine;
+use App\Models\Maintenance;
 use App\Models\Type;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,17 +33,8 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard', [
-        "stock" => Element::orderBy('updated_at', 'desc')->take(5)->get(),
-        "main" => [
-           [
-
-               "id"=>"5555",
-                "name" => "cccccccc",
-                "disc" => "hhhhhhhhhh",
-                "update_at" => "2020",
-                "qte" => "2020",
-           ] 
-        ]
+        "stock" => Element::orderBy('qte', 'Asc')->take(5)->get(),
+        "main" => Maintenance::orderBy('updated_at', 'desc')->with("machine")->take(5)->get()
     ]);
 })->name('dashboard');
 
@@ -69,7 +61,7 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/stock/search', [ElementC
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/stock/all', [ElementController::class, "all"])->name('stockall');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/machine/print', [ElementController::class, "printM"])->name('printM');
+Route::middleware(['auth:sanctum', 'verified'])->post('/machine/print', [MachineController::class, "printM"])->name('printM');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/data', [DashboardController::class, "index"])->name('dord');
 
@@ -79,7 +71,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/data', [Dashboa
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/types', function () {
-    return Inertia::render('Type', ["types" => Type::all()]);
+    return Inertia::render('Type', ["typesa" => Type::all()]);
 })->name('types');
 
 
@@ -94,6 +86,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/types/{id}', function (Re
 Route::middleware(['auth:sanctum', 'verified'])->get('/test', [TestController::class, "index"])->name('test');
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/type/save', [TypeController::class, "save"])->name('typeSave');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/type/add', [TypeController::class, "add"])->name('typeAdd');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/machine/{id}', function (Request $req, $id) {
@@ -112,3 +106,6 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/machine/delete', [Machin
 
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/machine/savenew', [MachineController::class, "savenew"])->name('MachineSavenew');
+
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/main/search', [MachineController::class, "search"])->name('Machinesearch');

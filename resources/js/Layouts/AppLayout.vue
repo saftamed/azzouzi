@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="relative">
         <Head :title="title" />
 
         <jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-100 ">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -238,6 +238,29 @@
                 <slot></slot>
             </main>
         </div>
+        <footer class="text-gray-600 body-font sticky bottom-0 w-full">
+        <div class="bg-white">
+            <div
+            class="
+                container
+                mx-auto
+                py-4
+                px-5
+            "
+            >
+            <p class="text-gray-500 text-sm text-center">
+                © 2021 Copyright:
+                <a
+                href="https://www.safta.com/"
+                class="text-gray-600 ml-1"
+                target="_blank"
+                >By Safta </a
+                >
+            </p>
+            </div>
+        </div>
+        </footer>
+        
     </div>
 </template>
 

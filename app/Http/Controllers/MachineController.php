@@ -67,4 +67,18 @@ class MachineController extends Controller
         $ma->delete();
         return $req["id"];
     }
+    public function search(Request $req)
+    {
+        $els =  Maintenance::where("disc", "LIKE", "%" . $req["se"] . "%")->get();
+        return response()->json($els);
+    }
+    public function printM(Request $req)
+    {
+        $m = Machine::where("id", $req["id"])->with(["maintenances" => function ($query)use ($req)  {
+            $query->where('created_at', 'like', $req["y"] . "-" . $req["m"]  . "%");
+        }])->get()[0];
+        return response()->json($m);
+    }
+    
+    
 }

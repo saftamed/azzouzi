@@ -2,8 +2,8 @@
     <app-layout title="Dashboard">
         <div class="container mx-auto px-4 mt-16">
             <div class="mb-5">
-                <h1 class="text-gray-800 text-5xl font-semibold mb-11">
-                    Stocks Elements
+                <h1 class="text-gray-800 text-5xl font-semibold ">
+                   Min Stocks Elements
                 </h1>
             </div>
             <div class="flex flex-col">
@@ -138,7 +138,7 @@
         </div>
         <div class="container mx-auto px-4 mt-16 mb-5">
             <div class="mb-5">
-                <h1 class="text-gray-800 text-5xl font-semibold mb-11">
+                <h1 class="text-gray-800 text-5xl font-semibold ">
                     Last Maintenance saved
                 </h1>
             </div>
@@ -180,7 +180,7 @@
                                                 tracking-wider
                                             "
                                         >
-                                            Name
+                                            Machine Numbre
                                         </th>
                                         <th
                                             scope="col"
@@ -208,7 +208,7 @@
                                                 tracking-wider
                                             "
                                         >
-                                            Qté
+                                            Machine Type
                                         </th>
 
                                         <th
@@ -241,7 +241,7 @@
                                                             text-gray-900
                                                         "
                                                     >
-                                                        {{ ee.name }}
+                                                        {{ ee.machine.numbre }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -253,7 +253,7 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-500">
-                                                {{ ee.qte }}
+                                                {{ ee.machine.type_id }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -272,6 +272,7 @@
                 </div>
             </div>
         </div>
+        
     </app-layout>
 </template>
 
