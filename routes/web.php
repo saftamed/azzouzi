@@ -91,7 +91,7 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/type/add', [TypeControll
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/machine/{id}', function (Request $req, $id) {
-    return Inertia::render('MachineDetaille', ["machinea" => Machine::where("id", $id)->with("maintenances", "type")->get()[0]]);
+    return Inertia::render('MachineDetaille', ["machinea" => Machine::where("id", $id)->with("maintenances", "type", "maintenances.elements")->get()[0]]);
 })->name('machine_detail');
 
 
@@ -104,6 +104,7 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/maintenance/addEdit', [M
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/machine/delete', [MachineController::class, "deleteMachine"])->name('deleteMachine');
 
+Route::middleware(['auth:sanctum', 'verified'])->post('/type/delete', [TypeController::class, "deleteType"])->name('deleteType');
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/machine/savenew', [MachineController::class, "savenew"])->name('MachineSavenew');
 

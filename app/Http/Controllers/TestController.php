@@ -13,7 +13,7 @@ class TestController extends Controller
     {
         $m = Machine::where("id", 1)->with(["maintenances" => function ($query) {
             $query->where('created_at', 'like', "20" . date('y') . "-" . date('m') . "%");
-        }])->get();
+        }])->with("maintenances.elements")->get();
         return $m;
         // $type = new Type();
         // $type->ref = "mmmmmmm";

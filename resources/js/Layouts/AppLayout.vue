@@ -25,7 +25,7 @@
                             </div>
                              <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('stock')" :active="route().current('stock')">
-                                    Stock
+                                    Stocks
                                 </jet-nav-link>
                             </div>
                              <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -154,6 +154,12 @@
                     <div class="pt-2 pb-3 space-y-1">
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('stock')" :active="route().current('stock')">
+                            Stocks
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('types')" :active="route().current('types')">
+                            Machine Types
                         </jet-responsive-nav-link>
                     </div>
 

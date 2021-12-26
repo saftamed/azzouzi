@@ -18,6 +18,7 @@ class CreateTypesTable extends Migration
             $table->string("ref");
             $table->string("nom");
             $table->string("fournisseur")->nullable();
+            $table->text("disc")->nullable();
             $table->timestamps();
         });
     }

@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Dashboard">
+    <app-layout title="Stock">
         <div class="container mx-auto px-4 mt-16">
             <div class="mb-5">
                 <h1 class="text-gray-800 text-5xl font-semibold mb-11">
@@ -11,7 +11,7 @@
                             my-2
                             flex
                             sm:flex-row
-                            flex-col
+
                             absolute
                             top-0
                             right-0

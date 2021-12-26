@@ -17,6 +17,7 @@ class CreateMachinesTable extends Migration
             $table->id();
             $table->integer("numbre");
             $table->string("emplacement");
+            $table->text("disc")->nullable();
             $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
             $table->timestamps();

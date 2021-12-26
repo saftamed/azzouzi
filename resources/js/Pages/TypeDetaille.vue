@@ -1,9 +1,9 @@
 <template>
     <app-layout title="Machine Types">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div class="p-10">
+        <div class="max-w-6xl mx-auto p-4">
+            <div class="p-4 mx-auto max-w-6xl">
                 <!--Card 1-->
-                <div class="w-full lg:max-w-full lg:flex">
+                <div class="">
                     <div
                         class="
                             border-r border-b border-l border-gray-400
@@ -12,6 +12,7 @@
                             rounded-b
                             lg:rounded-b-none lg:rounded-r
                             p-4
+                            mb-8
                             flex flex-col
                             justify-between
                             leading-normal
@@ -23,10 +24,7 @@
                                 {{ type.nom }}
                             </div>
                             <p class="text-gray-700 text-base">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Voluptatibus quia, Nonea!
-                                Maiores et perferendis eaque, exercitationem
-                                praesentium nihil.
+                                 {{type.disc==null?"no Discription":type.disc}}
                             </p>
                             <button
                             @click="show=true"
@@ -44,6 +42,23 @@
                             >
                                 Modifier
                             </button>
+                            <button
+                                @click="deleteType"
+                                class="
+                                    bg-red-500
+                                    hover:bg-red-700
+                                    text-white
+                                    font-bold
+                                    py-2
+                                    px-4
+                                    rounded-full
+                                    absolute
+                                    bottom-2
+                                    right-28
+                                "
+                            >
+                                Delete
+                            </button>
                         </div>
                         <div class="flex items-center">
                             <div class="text-sm">
@@ -58,7 +73,11 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 relative">
+              <h1 class="text-gray-800 text-5xl font-semibold">
+                    Machines
+                </h1>
+            <div class="grid grid-cols-1 md:grid-cols-4 relative mt-4">
+              
                   <button
                             @click="showM=true"
                                 class="
@@ -70,17 +89,18 @@
                                     px-4
                                     rounded-full
                                     absolute
-                                    top-2 right-2
+                                    -top-8 right-2
                                 "
                             >
                                 Add Machine
                             </button>
+                
                 <div v-for="machine in type.machines" :key="machine.id">
                     <div
                         class="
-                            my-20
+                            mt-2
                             px-4
-                            py-6
+                            py-4
                             transform
                             transition
                             duration-500
@@ -120,7 +140,7 @@
 
     <!-- This element is to trick the browser into centering the modal contents. -->
     <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
       <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         <div class="">
 
@@ -128,7 +148,7 @@
 <label class="block text-gray-700 text-lg font-bold mb-2" >
         Edit {{type.nom}}
       </label>
-  <form class="bg-white rounded px-8 pt-6 pb-1">
+  <form class="bg-white rounded px-2 pt-6 pb-1">
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
         Name
@@ -188,7 +208,7 @@
 
     <!-- This element is to trick the browser into centering the modal contents. -->
     <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
       <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         <div class="">
 
@@ -196,7 +216,7 @@
 <label class="block text-gray-700 text-lg font-bold mb-2" >
         Edit New Machine
       </label>
-  <form class="bg-white rounded px-8 pt-6 pb-1">
+  <form class="bg-white rounded px-2 pt-6 pb-1">
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
         Numbre
@@ -261,14 +281,25 @@ export default defineComponent({
             showM:false,
 
             typem:{
-                ...this.typea,
-                disc :"...."
+                ...this.typea
             },type:this.typea,
              m:{
             },
         };
     },
     methods: {
+        deleteType() {
+            if (confirm("Delete this Type")) {
+                axios
+                    .post("/type/delete", { id: this.type.id })
+                    .then((response) => {
+                        console.log(response.data);
+                        //this.machine = response.data;
+                        this.type = {};
+                        this.$inertia.visit("/types");
+                    });
+            }
+        },
         savemachine(){
             axios.post("/machine/savenew",{...this.m,type:this.type.id} ).then((response) => {
                 console.log(response.data);

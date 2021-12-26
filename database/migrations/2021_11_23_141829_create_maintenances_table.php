@@ -16,7 +16,7 @@ class CreateMaintenancesTable extends Migration
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('machine_id');
-            $table->foreign('machine_id')->references('id')->on('machines');
+            $table->foreign('machine_id')->references('id')->on('machines')->onDelete('cascade');
             $table->string("disc");
             $table->timestamps();
         });

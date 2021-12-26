@@ -1,6 +1,6 @@
 <template>
     <app-layout title="Machine Types">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 relative">
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 relative mt-24">
              <button
                             @click="show=true"
                                 class="
@@ -12,7 +12,7 @@
                                     px-4
                                     rounded-full
                                     absolute
-                                    top-2 right-2
+                                    -top-12 right-2
                                 "
                             >
                                 Add New Machine Type
@@ -21,9 +21,9 @@
                 <div v-for="type in types" :key="type.id" >
                     <div
                         class="
-                            my-20
+                            mt-2
                             px-4
-                            py-6
+                            py-4
                             transform
                             transition
                             duration-500
@@ -45,10 +45,7 @@
                                         {{ type.nom }}
                                     </div>
                                     <p class="text-gray-700 text-base">
-                                        Lorem ipsum dolor sit amet, consectetur
-                                        adipisicing elit. Voluptatibus quia,
-                                        Nonea! Maiores et perferendis eaque,
-                                        exercitationem praesentium nihil.
+                                       {{type.disc==null?"no Discription":type.disc}}
                                     </p>
                                     <div class="text-base">
                                         <span class="font-bold"
@@ -77,7 +74,7 @@
 
     <!-- This element is to trick the browser into centering the modal contents. -->
     <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
       <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         <div class="">
 
@@ -85,7 +82,7 @@
 <label class="block text-gray-700 text-lg font-bold mb-2" >
         New Type
       </label>
-  <form class="bg-white rounded px-8 pt-6 pb-1">
+  <form class="bg-white rounded px-2 pt-6 pb-1">
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
         Name
